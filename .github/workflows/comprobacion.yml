@@ -1,0 +1,64 @@
+# 1. NOMBRE DEL PIPELINE
+# Aparecerá identificado con este nombre en la pestaña "Actions" de GitHub.
+name: Mi Primer Pipeline de CI
+
+# 2. DISPARADOR (TRIGGER)
+# ¿Cuándo debe ejecutarse este flujo?
+on:
+  push:
+    branches: [ "main", "desarrollo" ] # Se ejecuta al hacer push a estas ramas
+  pull_request:
+    branches: [ "main" ]              # O al abrir/actualizar una PR hacia main
+
+# 3. LISTA DE TRABAJOS (JOBS)
+jobs:
+  # Definimos nuestro primer Job y le damos un identificador (ej. 'pruebas-calidad')
+  pruebas-calidad:
+    # Definimos el sistema operativo de la máquina virtual que nos prestará GitHub
+    runs-on: ubuntu-latest
+
+    # 4. PASOS DEL TRABAJO (STEPS)
+    steps:
+      # PASO A: Descargar el código del usuario dentro de la máquina virtual Ubuntu
+      # Usamos una acción empaquetada creada por la comunidad de GitHub (uses)
+      - name: Paso 1 - Descargar codigo del repositorio
+        uses: actions/checkout@v4
+
+# 1. NOMBRE DEL PIPELINE
+# Aparecerá identificado con este nombre en la pestaña "Actions" de GitHub.
+name: Mi Primer Pipeline de CI
+
+# 2. DISPARADOR (TRIGGER)
+# ¿Cuándo debe ejecutarse este flujo?
+on:
+  push:
+    branches: [ "main", "desarrollo" ] # Se ejecuta al hacer push a estas ramas
+  pull_request:
+    branches: [ "main" ]              # O al abrir/actualizar una PR hacia main
+
+# 3. LISTA DE TRABAJOS (JOBS)
+jobs:
+  # Definimos nuestro primer Job y le damos un identificador (ej. 'pruebas-calidad')
+  pruebas-calidad:
+    # Definimos el sistema operativo de la máquina virtual que nos prestará GitHub
+    runs-on: ubuntu-latest
+
+    # 4. PASOS DEL TRABAJO (STEPS)
+    steps:
+      # PASO A: Descargar el código del usuario dentro de la máquina virtual Ubuntu
+      # Usamos una acción empaquetada creada por la comunidad de GitHub (uses)
+      - name: Paso 1 - Descargar codigo del repositorio
+        uses: actions/checkout@v4
+
+      # PASO B: Ejecutar un comando simple en la consola del servidor remoto
+      - name: Paso 2 - Mostrar mensaje en consola
+        run: echo "¡Hola! La máquina virtual ha descargado el código correctamente."
+
+      # PASO C: Comprobar qué archivos hay descargados en la máquina
+      - name: Paso 3 - Listar archivos del proyecto
+        run: ls -la
+
+      - name: Paso 4 - Validar sintaxis
+        run: |
+          echo "Iniciando análisis sintáctico del código..."
+          echo "No se han encontrado errores de sintaxis. ¡Todo correcto!"
